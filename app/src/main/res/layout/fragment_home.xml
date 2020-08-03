@@ -7,6 +7,19 @@
     android:layout_gravity="center_horizontal|center_vertical">
 
     <Button
+        android:id="@+id/dx"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="dx"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resultSpace" />
+
+    <Button
         android:id="@+id/d100"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -14,93 +27,10 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resultSpace" />
-
-    <Button
-        android:id="@+id/dx"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="dx"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:onClick="functionPress"
-        app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toStartOf="@+id/del"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d100"
-        app:layout_constraintTop_toBottomOf="@+id/resultSpace" />
-
-    <Button
-        android:id="@+id/d4"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="d4"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        android:onClick="functionPress"
-        app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/d100" />
-
-    <Button
-        android:id="@+id/d6"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="d6"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/d8"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d4"
-        app:layout_constraintTop_toBottomOf="@+id/dx" />
-
-    <Button
-        android:id="@+id/d8"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="d8"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/C"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/dx"
-        app:layout_constraintTop_toBottomOf="@+id/del" />
-
-    <Button
-        android:id="@+id/d10"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="d10"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/d4" />
-
-    <Button
-        android:id="@+id/d12"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="d12"
-        android:textAllCaps="false"
-        android:textSize="25sp"
-        app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/d8"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d4"
-        app:layout_constraintTop_toBottomOf="@+id/d6" />
+        app:layout_constraintTop_toBottomOf="@+id/resultSpace" />
 
     <Button
         android:id="@+id/d20"
@@ -110,11 +40,81 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dx" />
+
+    <Button
+        android:id="@+id/d12"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="d12"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toStartOf="@+id/d10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/d20"
+        app:layout_constraintTop_toBottomOf="@+id/d100" />
+
+    <Button
+        android:id="@+id/d10"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="d10"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toStartOf="@+id/C"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/dx"
-        app:layout_constraintTop_toBottomOf="@+id/d8" />
+        app:layout_constraintStart_toEndOf="@+id/d100"
+        app:layout_constraintTop_toBottomOf="@+id/del" />
+
+    <Button
+        android:id="@+id/d8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="d8"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/d20" />
+
+    <Button
+        android:id="@+id/d6"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="d6"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toStartOf="@+id/d10"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/d20"
+        app:layout_constraintTop_toBottomOf="@+id/d12" />
+
+    <Button
+        android:id="@+id/d4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="d4"
+        android:textAllCaps="false"
+        android:textSize="25sp"
+        app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toStartOf="@+id/C"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/d100"
+        app:layout_constraintTop_toBottomOf="@+id/d10" />
 
     <Button
         android:id="@+id/n9"
@@ -127,8 +127,8 @@
         app:layout_constraintEnd_toStartOf="@+id/C"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/dx"
-        app:layout_constraintTop_toBottomOf="@+id/d20" />
+        app:layout_constraintStart_toEndOf="@+id/d100"
+        app:layout_constraintTop_toBottomOf="@+id/d4" />
 
     <Button
         android:id="@+id/n8"
@@ -138,11 +138,11 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/d8"
+        app:layout_constraintEnd_toStartOf="@+id/d10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d4"
-        app:layout_constraintTop_toBottomOf="@+id/d12" />
+        app:layout_constraintStart_toEndOf="@+id/d20"
+        app:layout_constraintTop_toBottomOf="@+id/d6" />
 
     <Button
         android:id="@+id/n7"
@@ -152,11 +152,11 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/d10" />
+        app:layout_constraintTop_toBottomOf="@+id/d8" />
 
     <Button
         android:id="@+id/n6"
@@ -169,7 +169,7 @@
         app:layout_constraintEnd_toStartOf="@+id/C"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/dx"
+        app:layout_constraintStart_toEndOf="@+id/d100"
         app:layout_constraintTop_toBottomOf="@+id/n9" />
 
     <Button
@@ -180,10 +180,10 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/d8"
+        app:layout_constraintEnd_toStartOf="@+id/d10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d4"
+        app:layout_constraintStart_toEndOf="@+id/d20"
         app:layout_constraintTop_toBottomOf="@+id/n8" />
 
     <Button
@@ -194,7 +194,7 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -211,7 +211,7 @@
         app:layout_constraintEnd_toStartOf="@+id/C"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/dx"
+        app:layout_constraintStart_toEndOf="@+id/d100"
         app:layout_constraintTop_toBottomOf="@+id/n6" />
 
     <Button
@@ -222,10 +222,10 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/d8"
+        app:layout_constraintEnd_toStartOf="@+id/d10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d4"
+        app:layout_constraintStart_toEndOf="@+id/d20"
         app:layout_constraintTop_toBottomOf="@+id/n5" />
 
     <Button
@@ -236,7 +236,7 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -250,7 +250,7 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/dx"
+        app:layout_constraintEnd_toStartOf="@+id/d100"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
@@ -264,10 +264,10 @@
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toStartOf="@+id/d8"
+        app:layout_constraintEnd_toStartOf="@+id/d10"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d4"
+        app:layout_constraintStart_toEndOf="@+id/d20"
         app:layout_constraintTop_toBottomOf="@+id/n2" />
 
     <Button
@@ -281,7 +281,7 @@
         app:layout_constraintEnd_toStartOf="@+id/C"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/dx"
+        app:layout_constraintStart_toEndOf="@+id/d100"
         app:layout_constraintTop_toBottomOf="@+id/n3" />
 
     <Button
@@ -294,7 +294,7 @@
         app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toStartOf="@+id/C"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/dx"
+        app:layout_constraintStart_toEndOf="@+id/d100"
         app:layout_constraintTop_toBottomOf="@+id/resultSpace" />
 
     <Button
@@ -314,55 +314,55 @@
         android:id="@+id/sDivide"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text=" ÷ "
+        android:text="÷"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d8"
+        app:layout_constraintStart_toEndOf="@+id/d10"
         app:layout_constraintTop_toBottomOf="@+id/C" />
 
     <Button
         android:id="@+id/sMultiply"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text=" × "
+        android:text="×"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d8"
+        app:layout_constraintStart_toEndOf="@+id/d10"
         app:layout_constraintTop_toBottomOf="@+id/sDivide" />
 
     <Button
         android:id="@+id/sMinus"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text=" – "
+        android:text="–"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d8"
+        app:layout_constraintStart_toEndOf="@+id/d10"
         app:layout_constraintTop_toBottomOf="@+id/sMultiply" />
 
     <Button
         android:id="@+id/sPlus"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text=" + "
+        android:text="+"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintDimensionRatio="1.2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d8"
+        app:layout_constraintStart_toEndOf="@+id/d10"
         app:layout_constraintTop_toBottomOf="@+id/sMinus" />
 
     <Button
@@ -376,7 +376,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d8"
+        app:layout_constraintStart_toEndOf="@+id/d10"
         app:layout_constraintTop_toBottomOf="@+id/sPlus" />
 
     <TextView
