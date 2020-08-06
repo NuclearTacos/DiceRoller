@@ -1,7 +1,6 @@
 package io.nucleartacos.diceroller.ui.home
 
 import android.os.Bundle
-import android.text.TextUtils.substring
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +11,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import io.nucleartacos.diceroller.R
 import io.nucleartacos.diceroller.data.Slot
+import kotlinx.android.synthetic.main.fragment_home.*
+import kotlin.random.Random
 
 class HomeFragment : Fragment() {
 
@@ -44,12 +45,32 @@ class HomeFragment : Fragment() {
     fun diceSpaceString(): String {
         var spaceString = ""
 
-        slotList.forEach( {
+        slotList.forEach {
             spaceString += it.toString()
-        })
+        }
 
         return spaceString.replace("  "," " ).trim()
     }
+
+//    fun rollStack(): Int {
+//        var total = 0
+//
+//        slotList.forEach {
+//            if (it.type != Slot.SLOT_TYPE.OPERATION) {
+//                var factor = 1
+//
+//                if (slotList.size > 1 && slotList[slotList.indexOf(it)-1].operation == Slot.OPERATION.MINUS) {
+//                    factor = -1
+//                }
+//
+//                total += factor * it.rollSlot()
+//            }
+//        }
+//
+//        resultSpace.text = total.toString()
+//
+//        return total
+//    }
 
 
     fun dButtonPress(button: View) {
@@ -57,26 +78,36 @@ class HomeFragment : Fragment() {
             // If there are no elements, the last slot counts as 1
             // Or if the last slot *isn't* a number
             if (slotList.size == 0 ) {
-                var lastSlot = Slot(1)
+                var lastSlot = Slot(button.text.toString())
+                lastSlot.quantity = 1
                 slotList.add( lastSlot )
-                slotList.add( Slot(button.text.toString()) )
             }
             else {
                 var lastSlot = slotList.removeAt( slotList.lastIndex )
 
                 if (lastSlot.type == Slot.SLOT_TYPE.NUMBER) {
+                    lastSlot.diceType = lastSlot.getDiceType(button.text.toString())
+                    lastSlot.type = Slot.SLOT_TYPE.DIE
                     slotList.add(lastSlot)
-                    slotList.add( Slot(button.text.toString()) )
+                }
+                else if (lastSlot.type == Slot.SLOT_TYPE.OPERATION) {
+                    slotList.add(lastSlot)
+
+                    var newSlot = Slot(button.text.toString())
+                    newSlot.quantity = 1
+                    slotList.add(newSlot)
                 }
                 // If the lastSlot diceType matches the diceType of the next button, increment the prior number
                 else if (lastSlot.diceType == lastSlot.getDiceType( button.text.toString())){
-                    slotList[slotList.lastIndex].number += 1
+                    lastSlot.quantity += 1
                     slotList.add(lastSlot)
                 }
                 else {
                     slotList.add( lastSlot )
-                    slotList.add( Slot(1) )
-                    slotList.add( Slot(button.text.toString()) )
+                    slotList.add( Slot(Slot.OPERATION.PLUS) )
+                    var newSlot = Slot(button.text.toString())
+                    newSlot.quantity = 1
+                    slotList.add(newSlot)
                 }
             }
 
@@ -86,8 +117,32 @@ class HomeFragment : Fragment() {
     }
 
     fun numButtonPress(button: View) {
-        if (button is Button) {
-            slotList.add( Slot( button.text.toString().toInt() ) )
+       if (button is Button) {
+            // You only need special logic if the array isn't empty.
+            if (slotList.size != 0 ) {
+                if(slotList.last().type == Slot.SLOT_TYPE.NUMBER) {
+                    slotList.last().quantity = (slotList.last().quantity.toString() + button.text).toInt()
+                }
+                // If the previous Dice Tyep id dx, then don't add an operator beforehand.
+                else if (slotList.last().diceType == Slot.DICE_TYPE.dx) {
+                    if (slotList.last().y == 0) {
+                        slotList.last().y = button.text.toString().toInt()
+                    }
+                    else {
+                        slotList.last().y = (slotList.last().y.toString() + button.text).toInt()
+                    }
+                }
+                else if (slotList.last().type == Slot.SLOT_TYPE.DIE) {
+                    slotList.add(Slot(Slot.OPERATION.PLUS))
+                    slotList.add(Slot(button.text.toString().toInt()))
+                }
+                else {
+                    slotList.add(Slot(button.text.toString().toInt()))
+                }
+            }
+            else {
+                slotList.add(Slot(button.text.toString().toInt()))
+            }
 
             updateDiceSpaceText(button)
         }
@@ -96,7 +151,36 @@ class HomeFragment : Fragment() {
 
     fun operationButtonPress(button: View, operation: Slot.OPERATION) {
         if (button is Button) {
-            slotList.add( Slot( operation ) )
+            // We don't want to add an operation if the list is empty.
+            if (slotList.size > 0) {
+                if (slotList.last().type == Slot.SLOT_TYPE.OPERATION) {
+                    when (button.id) {
+                        R.id.sPlus -> slotList.last().operation = Slot.OPERATION.PLUS
+                        R.id.sMinus -> slotList.last().operation = Slot.OPERATION.MINUS
+                    }
+                }
+                else if (slotList.last().type == Slot.SLOT_TYPE.DIE) {
+                    when (button.id) {
+                        R.id.dAdd -> slotList.last().quantity += 1
+                        R.id.dMinus -> slotList.last().quantity -= 1
+                        R.id.sMinus -> slotList.add(Slot(Slot.OPERATION.MINUS))
+                        R.id.sPlus -> slotList.add(Slot(Slot.OPERATION.PLUS))
+                        else -> ""
+                    }
+
+                    // If that dice slot is now 0 or less.
+                    if (slotList.last().quantity <= 0 && slotList.last().type == Slot.SLOT_TYPE.DIE) {
+                        slotList.removeAt(slotList.lastIndex)
+
+                        // If the prior slot is an Operation, then remove that too.
+                        if (slotList.size > 0 && slotList.last().type == Slot.SLOT_TYPE.OPERATION)
+                                slotList.removeAt(slotList.lastIndex)
+                    }
+                }
+                else {
+                    slotList.add( Slot( operation ) )
+                }
+            }
 
             updateDiceSpaceText(button)
         }
@@ -105,9 +189,48 @@ class HomeFragment : Fragment() {
 
     fun delPress(button: View) {
         if (button is Button){
-            slotList.removeAt( slotList.size - 1 )
+            // && slotList.last().diceType != Slot.DICE_TYPE.dx && slotList.last().y == 0)
+            // Only delete something if there is a thing (duh)
+            if (slotList.size > 0) {
+                // if the prior item is a dx slot, peel off the last digit.
+                if (slotList.last().diceType == Slot.DICE_TYPE.dx && slotList.last().y > 0) {
+                    slotList.last().y /= 10
+                }
+                else {
+                    slotList.removeAt( slotList.size - 1 )
+                }
+            }
 
             updateDiceSpaceText(button)
+        }
+        else throw Exception()
+    }
+
+    fun rollPress(button: View) {
+        if (button is Button){
+            var total = 0
+
+            slotList.forEach {
+                if (it.type != Slot.SLOT_TYPE.OPERATION) {
+                    var factor = 1
+                    var slotVal = 0
+
+                    if (it.type == Slot.SLOT_TYPE.NUMBER) {
+                        slotVal = it.quantity
+                    }
+                    else {
+                        if (slotList.size > 1 && slotList[slotList.indexOf(it)-1].operation == Slot.OPERATION.MINUS) {
+                            factor = -1
+                        }
+
+                        slotVal = it.rollSlot()
+                    }
+
+                    total += factor * slotVal
+                }
+            }
+
+            resultSpace.text = total.toString()
         }
         else throw Exception()
     }
@@ -149,11 +272,13 @@ class HomeFragment : Fragment() {
         root.findViewById<Button>(R.id.del).setOnClickListener { delPress( it ) }
         root.findViewById<Button>(R.id.C).setOnClickListener { clearPress( it ) }
 
-        root.findViewById<Button>(R.id.sDivide).setOnClickListener { operationButtonPress( it, Slot.OPERATION.DIVIDE ) }
-        root.findViewById<Button>(R.id.sMultiply).setOnClickListener { operationButtonPress( it, Slot.OPERATION.MULTIPLY ) }
-        root.findViewById<Button>(R.id.sMinus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.MINUS ) }
+        root.findViewById<Button>(R.id.dAdd).setOnClickListener { operationButtonPress( it, Slot.OPERATION.DICE_ADD ) }
+        root.findViewById<Button>(R.id.dMinus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.DICE_MINUS ) }
         root.findViewById<Button>(R.id.sPlus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.PLUS ) }
+        root.findViewById<Button>(R.id.sMinus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.MINUS ) }
         root.findViewById<Button>(R.id.sOpen).setOnClickListener { operationButtonPress( it, Slot.OPERATION.OPEN ) }
         root.findViewById<Button>(R.id.sClose).setOnClickListener { operationButtonPress( it, Slot.OPERATION.CLOSE ) }
+
+        root.findViewById<Button>(R.id.aRoll).setOnClickListener { rollPress( it ) }
     }
 }

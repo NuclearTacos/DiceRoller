@@ -311,23 +311,10 @@
         app:layout_constraintTop_toBottomOf="@+id/resultSpace" />
 
     <Button
-        android:id="@+id/sDivide"
+        android:id="@+id/dAdd"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="÷"
-        android:textAllCaps="false"
-        android:textSize="30sp"
-        app:layout_constraintDimensionRatio="1.2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/d10"
-        app:layout_constraintTop_toBottomOf="@+id/C" />
-
-    <Button
-        android:id="@+id/sMultiply"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="×"
+        android:text="+1d"
         android:textAllCaps="false"
         android:textSize="30sp"
         app:layout_constraintDimensionRatio="1.2"
@@ -335,7 +322,21 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/d10"
-        app:layout_constraintTop_toBottomOf="@+id/sDivide" />
+        app:layout_constraintTop_toBottomOf="@+id/C" />
+
+    <Button
+        android:id="@+id/dMinus"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="-1d"
+        android:textAllCaps="false"
+        android:textSize="30sp"
+        app:layout_constraintDimensionRatio="1.2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@+id/d10"
+        app:layout_constraintTop_toBottomOf="@+id/dAdd" />
 
     <Button
         android:id="@+id/sMinus"
@@ -349,7 +350,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/d10"
-        app:layout_constraintTop_toBottomOf="@+id/sMultiply" />
+        app:layout_constraintTop_toBottomOf="@+id/dMinus" />
 
     <Button
         android:id="@+id/sPlus"
@@ -384,7 +385,9 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:gravity="right|center_vertical"
+        android:maxLines="1"
         android:paddingRight="10sp"
+        android:scrollHorizontally="true"
         android:text="Dice Space"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -398,11 +401,12 @@
         android:layout_height="50dp"
         android:gravity="right|center_vertical"
         android:paddingRight="10sp"
-        android:text="Results"
+        android:scrollHorizontally="true"
+        android:singleLine="true"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/diceSpace" />
 
