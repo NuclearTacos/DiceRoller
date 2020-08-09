@@ -1,12 +1,13 @@
 package io.nucleartacos.diceroller.data
 
-import android.media.VolumeShaper
+import kotlin.random.Random
 
 class Slot {
     
     lateinit var operation: OPERATION
     lateinit var diceType: DICE_TYPE
-    var number = 0
+    var quantity = 0
+    var y = 0
 
     lateinit var type: SLOT_TYPE
 
@@ -15,7 +16,7 @@ class Slot {
         type = SLOT_TYPE.NONE
         operation = OPERATION.NONE
         diceType = DICE_TYPE.none
-        number = 0
+        quantity = 0
     }
 
     constructor( buttonText: String ) {
@@ -24,7 +25,7 @@ class Slot {
 
         // The other values are set to their "none" values
         operation = OPERATION.NONE
-        number = 0
+        quantity = 0
     }
 
     constructor( op: OPERATION ) {
@@ -33,12 +34,12 @@ class Slot {
 
         // The other values are set to their "none" values
         diceType = DICE_TYPE.none
-        number = 0
+        quantity = 0
     }
 
     constructor( num: Int ) {
         type = SLOT_TYPE.NUMBER
-        number = num
+        quantity = num
 
         // The other values are set to their "none" values
         operation = OPERATION.NONE
@@ -66,30 +67,61 @@ class Slot {
                 when (type) {
                     SLOT_TYPE.OPERATION ->
                         when (operation) {
-                            OPERATION.DIVIDE -> " ÷ "
-                            OPERATION.MULTIPLY -> " × "
                             OPERATION.MINUS -> " – "
                             OPERATION.PLUS -> " + "
-                            OPERATION.CLOSE -> " ( "
-                            OPERATION.OPEN -> " ) "
+                            OPERATION.CLOSE -> " ) "
+                            OPERATION.OPEN -> " ( "
                             else -> ""
                         }
                     SLOT_TYPE.DIE ->
-                        when (diceType) {
-                            DICE_TYPE.dx -> "dx"
-                            DICE_TYPE.d100 -> "d100"
-                            DICE_TYPE.d20 -> "d20"
-                            DICE_TYPE.d12 -> "d12"
-                            DICE_TYPE.d10 -> "d10"
-                            DICE_TYPE.d8 -> "d8"
-                            DICE_TYPE.d6 -> "d6"
-                            DICE_TYPE.d4 -> "d4"
+                        quantity.toString() + ( when (diceType) {
+                            DICE_TYPE.dx -> "d̲" + if (y == 0) "" else y.toString()
+                            DICE_TYPE.d100 -> {
+                                y = 100
+                                "d100"
+                            }
+                            DICE_TYPE.d20 -> {
+                                y = 20
+                                "d20"
+                            }
+                            DICE_TYPE.d12 -> {
+                                y = 12
+                                "d12"
+                            }
+                            DICE_TYPE.d10 -> {
+                                y = 10
+                                "d10"
+                            }
+                            DICE_TYPE.d8 -> {
+                                y = 8
+                                "d8"
+                            }
+                            DICE_TYPE.d6 -> {
+                                y = 6
+                                "d6"
+                            }
+                            DICE_TYPE.d4 -> {
+                                y = 4
+                                "d4"
+                            }
                             else -> ""
-                        }
-                    SLOT_TYPE.NUMBER -> number.toString()
+                        })
+                    SLOT_TYPE.NUMBER -> quantity.toString()
                     else -> ""
                 }
             )
+    }
+
+    fun rollSlot(): Int {
+        var outcome = 0
+
+        if (diceType != Slot.SLOT_TYPE.OPERATION) {
+            for (i in 1..quantity) {
+                outcome += Random.nextInt(1, y)
+            }
+        }
+
+        return outcome
     }
 
 
@@ -103,8 +135,8 @@ class Slot {
     enum class OPERATION {
         PLUS,
         MINUS,
-        MULTIPLY,
-        DIVIDE,
+        DICE_ADD,
+        DICE_MINUS,
         OPEN,
         CLOSE,
         NONE
