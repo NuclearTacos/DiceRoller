@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/nav_home"
         android:name="io.nucleartacos.diceroller.ui.home.HomeFragment"
-        android:label="@string/menu_home"
+        android:label="@string/menu_calculator"
         tools:layout="@layout/fragment_home" />
 
     <fragment

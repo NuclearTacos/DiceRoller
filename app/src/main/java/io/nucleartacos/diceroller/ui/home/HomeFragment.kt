@@ -52,27 +52,6 @@ class HomeFragment : Fragment() {
         return spaceString.replace("  "," " ).trim()
     }
 
-//    fun rollStack(): Int {
-//        var total = 0
-//
-//        slotList.forEach {
-//            if (it.type != Slot.SLOT_TYPE.OPERATION) {
-//                var factor = 1
-//
-//                if (slotList.size > 1 && slotList[slotList.indexOf(it)-1].operation == Slot.OPERATION.MINUS) {
-//                    factor = -1
-//                }
-//
-//                total += factor * it.rollSlot()
-//            }
-//        }
-//
-//        resultSpace.text = total.toString()
-//
-//        return total
-//    }
-
-
     fun dButtonPress(button: View) {
         if (button is Button) {
             // If there are no elements, the last slot counts as 1
@@ -215,14 +194,17 @@ class HomeFragment : Fragment() {
                     var factor = 1
                     var slotVal = 0
 
+                    var previousSlot = slotList.indexOf(it)-1
+                    if (previousSlot >= 0){
+                        if (slotList.size > 1 && slotList[previousSlot].operation == Slot.OPERATION.MINUS) {
+                            factor = -1
+                        }
+                    }
+
                     if (it.type == Slot.SLOT_TYPE.NUMBER) {
                         slotVal = it.quantity
                     }
                     else {
-                        if (slotList.size > 1 && slotList[slotList.indexOf(it)-1].operation == Slot.OPERATION.MINUS) {
-                            factor = -1
-                        }
-
                         slotVal = it.rollSlot()
                     }
 
