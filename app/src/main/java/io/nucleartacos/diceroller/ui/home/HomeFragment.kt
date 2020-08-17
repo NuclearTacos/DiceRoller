@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -12,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import io.nucleartacos.diceroller.R
 import io.nucleartacos.diceroller.data.Slot
 import kotlinx.android.synthetic.main.fragment_home.*
-import kotlin.random.Random
+
 
 class HomeFragment : Fragment() {
 
@@ -28,18 +29,22 @@ class HomeFragment : Fragment() {
             ViewModelProviders.of(this).get(HomeViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_home, container, false)
         //val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
-            //textView.text = it
-        })
+//        homeViewModel.text.observe(this, Observer {
+//            //textView.text = it
+//        })
 
         // Initialize the Dice Space with a blank value.
         root.findViewById<TextView>(R.id.diceSpace).text = ""
 
         // Get all of the function buttons.  The function buttons are every button that add things
         // to the Dice Space.  Any X, dY, or +/-/whatever buttons.
-        assignButtionClicks(root)
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        assignButtionClicks(view)
     }
 
     fun diceSpaceString(): String {
@@ -168,7 +173,6 @@ class HomeFragment : Fragment() {
 
     fun delPress(button: View) {
         if (button is Button){
-            // && slotList.last().diceType != Slot.DICE_TYPE.dx && slotList.last().y == 0)
             // Only delete something if there is a thing (duh)
             if (slotList.size > 0) {
                 // if the prior item is a dx slot, peel off the last digit.
@@ -231,36 +235,38 @@ class HomeFragment : Fragment() {
     }
 
     fun assignButtionClicks(root: View) { //: ArrayList<Button>{
-        root.findViewById<Button>(R.id.dx).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d100).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d20).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d12).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d10).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d8).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d6).setOnClickListener { dButtonPress( it ) }
-        root.findViewById<Button>(R.id.d4).setOnClickListener { dButtonPress( it ) }
+        dx.setOnClickListener { dButtonPress( it ) }
+        d100.setOnClickListener { dButtonPress( it ) }
+        d20.setOnClickListener { dButtonPress( it ) }
+        d12.setOnClickListener { dButtonPress( it ) }
+        d10.setOnClickListener { dButtonPress( it ) }
+        d8.setOnClickListener { dButtonPress( it ) }
+        d6.setOnClickListener { dButtonPress( it ) }
+        d4.setOnClickListener { dButtonPress( it ) }
 
-        root.findViewById<Button>(R.id.n9).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n8).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n7).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n6).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n5).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n4).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n3).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n2).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n1).setOnClickListener { numButtonPress( it ) }
-        root.findViewById<Button>(R.id.n0).setOnClickListener { numButtonPress( it ) }
+        n9.setOnClickListener { numButtonPress( it ) }
+        n8.setOnClickListener { numButtonPress( it ) }
+        n7.setOnClickListener { numButtonPress( it ) }
+        n6.setOnClickListener { numButtonPress( it ) }
+        n5.setOnClickListener { numButtonPress( it ) }
+        n4.setOnClickListener { numButtonPress( it ) }
+        n3.setOnClickListener { numButtonPress( it ) }
+        n2.setOnClickListener { numButtonPress( it ) }
+        n1.setOnClickListener { numButtonPress( it ) }
+        n0.setOnClickListener { numButtonPress( it ) }
 
-        root.findViewById<Button>(R.id.del).setOnClickListener { delPress( it ) }
-        root.findViewById<Button>(R.id.C).setOnClickListener { clearPress( it ) }
+        del.setOnClickListener { delPress( it ) }
+        C.setOnClickListener { clearPress( it ) }
 
-        root.findViewById<Button>(R.id.dAdd).setOnClickListener { operationButtonPress( it, Slot.OPERATION.DICE_ADD ) }
-        root.findViewById<Button>(R.id.dMinus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.DICE_MINUS ) }
-        root.findViewById<Button>(R.id.sPlus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.PLUS ) }
-        root.findViewById<Button>(R.id.sMinus).setOnClickListener { operationButtonPress( it, Slot.OPERATION.MINUS ) }
-        root.findViewById<Button>(R.id.sOpen).setOnClickListener { operationButtonPress( it, Slot.OPERATION.OPEN ) }
-        root.findViewById<Button>(R.id.sClose).setOnClickListener { operationButtonPress( it, Slot.OPERATION.CLOSE ) }
+        dAdd.setOnClickListener { operationButtonPress( it, Slot.OPERATION.DICE_ADD ) }
+        dMinus.setOnClickListener { operationButtonPress( it, Slot.OPERATION.DICE_MINUS ) }
+        sPlus.setOnClickListener { operationButtonPress( it, Slot.OPERATION.PLUS ) }
+        sMinus.setOnClickListener { operationButtonPress( it, Slot.OPERATION.MINUS ) }
 
-        root.findViewById<Button>(R.id.aRoll).setOnClickListener { rollPress( it ) }
+
+        sOpen.setOnClickListener { operationButtonPress( it, Slot.OPERATION.OPEN ) }
+        sClose.setOnClickListener { operationButtonPress( it, Slot.OPERATION.CLOSE ) }
+
+        aRoll.setOnClickListener { rollPress( it ) }
     }
 }

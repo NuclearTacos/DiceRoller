@@ -256,11 +256,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/n1" />
 
-    <Button
+    <ImageButton
         android:id="@+id/sOpen"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="("
+        android:src="@drawable/ic_button_save"
         android:textAllCaps="false"
         android:textSize="25sp"
         app:layout_constraintDimensionRatio="1.2"
